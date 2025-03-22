@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "target": "ES2021",
+      "module": "CommonJS",
+      "outDir": "./dist",
+      "rootDir": "./",
+      "strict": true,
+      "esModuleInterop": true,
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true
+    },
+    "include": ["server.ts", "config/**/*", "controllers/**/*", "models/**/*", "routes/**/*", "utils/**/*"]
+  }
+  
