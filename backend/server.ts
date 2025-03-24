@@ -1,12 +1,13 @@
 import express, { Application } from 'express';
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import userRoutes from './routes/userRoutes';
 import thoughtRoutes from './routes/thoughtRoutes';
 import { connectDB } from './config/db';
 
 dotenv.config();
 
-const app: Application = express();
+export const app: Application = express();
 const PORT = process.env.PORT || 3000;
 
 //Middleware
