@@ -1,4 +1,5 @@
 import { Schema, Types, Document } from 'mongoose';
+import { customDateFormat } from '../utils/dateFormat';
 
 export interface IReaction extends Document {
   reactionId: Types.ObjectId;
@@ -25,7 +26,7 @@ export const ReactionSchema = new Schema<IReaction>(
     createdAt: {
       type: Date,
       default: Date.now,
-      get: (timestamp: Date) => timestamp.toISOString(),
+      get: (timestamp: Date) => new Date(customDateFormat(timestamp)),
     },
   },
   {
