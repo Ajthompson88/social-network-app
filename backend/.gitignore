@@ -12,4 +12,6 @@ dist
 *.tsbuildinfo
 
 # Ignore Editor Variables
-.vscode/
+.vscode/settings.json
+
+
