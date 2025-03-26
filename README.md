@@ -13,9 +13,6 @@
 ## Description
 The Social Network API is a NoSQL-based backend application designed to support a social networking platform. This API allows users to create accounts, share thoughts, react to other users' thoughts, and manage a friend list. Built using Node.js, Express.js, MongoDB, and Mongoose, the API follows a RESTful architecture and efficiently handles large amounts of unstructured data.
 
-## Installation
-npm install express mongoose dotenv cors
-
 ## Usage
 
 ### 📂 Installation & Setup
@@ -23,6 +20,7 @@ npm install express mongoose dotenv cors
 #### Clone the Repository
 
 - git clone git@github.com:Ajthompson88/social-network-app.git
+
 - cd backend
 
 #### 💽 Install Dependancies
@@ -53,7 +51,7 @@ npm install express mongoose dotenv cors
 npm install --save-dev typescript ts-node-dev @types/express @types/mongoose jest supertest @types/jest @types/supertest mongodb-memory-server
 
 
-#### Set Envinronment Variables
+#### 🌎 Set Envinronment Variables
 
 - MONGO_URI=mongodb://127.0.0.1:27017/socialDB
 - PORT=3000
