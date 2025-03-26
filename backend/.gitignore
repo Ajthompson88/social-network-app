@@ -10,3 +10,6 @@ dist
 
 # Ignore TypeScript cache
 *.tsbuildinfo
+
+# Ignore Editor Variables
+.vscode/
