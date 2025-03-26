@@ -20,28 +20,60 @@ npm install express mongoose dotenv cors
 
 ### 📂 Installation & Setup
 
-### Clone the Repository
+#### Clone the Repository
 
 - git clone git@github.com:Ajthompson88/social-network-app.git
 - cd backend
 
-### Install Depenancies
+#### 💽 Install Dependancies
 
-- npm install
+| Package         | Description                   |
+|-----------------|-------------------------------|
+| express         | Web framework for API routing |
+| mongoose        | MongoDB ODM (Object Data Modeling) |
+| dotenv          | Loads environment variables from a `.env` file |
+| cors            | Middleware for handling Cross-Origin Resource Sharing |
 
-### Set Envinronment Variables
+- npm install express mongoose dotenv cors
+
+#### 💽 Install DevDependancies 
+
+| Package | 	Description            |
+|---------|----------------------------|
+| typescript	| Enables TypeScript support |
+|ts-node-dev	| Runs TypeScript code in development mode with auto-restart|
+| @types/express	| Type definitions for Express.js |
+| @types/mongoose	|Type definitions for Mongoose |
+|jest	|JavaScript testing framework|
+|supertest	|Library for testing API endpoints|
+|@types/jest	|Type definitions for Jest|
+|@types/supertest	|Type definitions for Supertest |
+|mongodb-memory-server	|In-memory MongoDB instance for testing |
+
+npm install --save-dev typescript ts-node-dev @types/express @types/mongoose jest supertest @types/jest @types/supertest mongodb-memory-server
+
+
+#### Set Envinronment Variables
 
 - MONGO_URI=mongodb://127.0.0.1:27017/socialDB
 - PORT=3000
 
-### Start the Server
+#### Start the Server
 
 - npm run dev
 - npm start
 
+#### Explanation of Scripts 
+
+| Script | Command | Description|
+|--------|---------|------------|
+| Start Server| npm start| Runs the compiled JavaScript version `(dist/server.js)`|
+| Development Mode | npm run dev | Runs TypeScript `(src/server.ts)` with auto-reloading|
+| Build Project | npm run build | Compiles files into JavaScript `(dist/)` folder|
+
 ## 📡 API Routes
 
-### 🧑 User Routes
+#### 🧑 User Routes
 | Method  | Endpoint                           | Description                          |
 |---------|------------------------------------|--------------------------------------|
 | `GET`   | `/api/users`                      | Get all users                        |
@@ -54,7 +86,7 @@ npm install express mongoose dotenv cors
 
 ---
 
-### 💭 Thought Routes
+#### 💭 Thought Routes
 | Method  | Endpoint                          | Description                         |
 |---------|-----------------------------------|-------------------------------------|
 | `GET`   | `/api/thoughts`                   | Get all thoughts                   |
@@ -65,7 +97,7 @@ npm install express mongoose dotenv cors
 
 ---
 
-### 💬 Reaction Routes
+#### 💬 Reaction Routes
 | Method  | Endpoint                                  | Description                          |
 |---------|------------------------------------------|--------------------------------------|
 | `POST`  | `/api/thoughts/:thoughtId/reactions`    | Add a reaction to a thought         |
@@ -75,7 +107,11 @@ npm install express mongoose dotenv cors
 
 ## 🧪 Running Tests
 
-- npm test
+| Script | Command | Description |
+|--------|---------|-------------|
+| Run Tests | npm test | Executes Jest tests |
+| Watch Tests | npm run test:watch | Runs Jest in watch mode for live testing |
+| Test Coverage | npm run test:coverage | Shows Jest test coverage report |
 
 
 ## Questions
