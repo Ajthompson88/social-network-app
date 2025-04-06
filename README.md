@@ -53,7 +53,7 @@ npm install --save-dev typescript ts-node-dev @types/express @types/mongoose jes
 
 #### 🌎 Set Envinronment Variables
 
-- MONGO_URI=mongodb://127.0.0.1:27017/socialDB
+- MONGO_URI=mongodb://"your URL here"
 - PORT=3000
 
 #### Start the Server
