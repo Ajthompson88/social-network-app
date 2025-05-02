@@ -1,7 +1,7 @@
 import request from 'supertest'; // Importing Supertest to make HTTP requests to the API during testing
 import express from 'express'; // Importing Express to create a temporary app for testing
 import router from '../routes/thoughtRoutes'; // Importing the router for "thoughts" routes (adjust the path if necessary)
-import { describe, expect, it } from '@jest/globals'; // Importing Jest functions for testing
+import { describe, expect, it, jest, afterAll } from '@jest/globals'; // Importing Jest functions for testing, including jest and afterAll
 import mongoose from 'mongoose';
 import { server } from '../server'; // Adjust the path to your server file
 

@@ -14,12 +14,14 @@ describe('User Controller', () => {
   let res: Partial<Response>; // A mock version of the Express Response object
   let jsonMock: jest.Mock<any>; // A mock function to simulate the res.json method
   let statusMock: jest.Mock<any>; // A mock function to simulate the res.status method
+  let nextMock: jest.Mock<any>; // A mock function to simulate the next middleware
 
   // Set up mock Request and Response objects before each test
   beforeEach(() => {
     req = {}; // Initialize an empty mock Request object
     jsonMock = jest.fn(); // Create a mock function for res.json
-    statusMock = jest.fn().mockReturnValue({ json: jsonMock }); // Create a mock function for res.status that returns the mock res.json
+    statusMock = jest.fn(); // Create a mock function for res.status
+    nextMock = jest.fn(); // Create a mock function for next
     res = {
       status: statusMock, // Assign the mock status function to res.status
       json: jsonMock, // Assign the mock json function to res.json
@@ -37,9 +39,9 @@ describe('User Controller', () => {
     it('should return 404 when no users are found', async () => {
       // Mock the User.find method to simulate no users being found
       jest.spyOn(User, 'find').mockResolvedValueOnce([]); // Simulate no users found
-
+      await getAllUsers(req as Request, res as Response, nextMock);
       // Call the getAllUsers function with the mock Request and Response objects
-      await getAllUsers(req as Request, res as Response);
+      await getAllUsers(req as Request, res as Response, nextMock);
 
       // Verify that res.status was called with 404
       expect(statusMock).toHaveBeenCalledWith(404);
