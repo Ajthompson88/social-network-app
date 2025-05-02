@@ -22,7 +22,7 @@ A RESTful API for a social networking platform, built with Node.js, Express, Mon
   - [Thought Routes](#thought-routes)  
   - [Reaction Routes](#reaction-routes)  
 - [Database Seeding](#database-seeding)  
-- [Project Structure](#project-structure)  
+- [File Structure](#file-structure)  
 - [Testing](#testing)  
 - [Contributing](#contributing)  
 - [License](#license)  
@@ -219,6 +219,10 @@ npm run seed
     5. Open a Pull Request
 
 Please adhere to existing code style and include tests for new functionality.
+
+## License
+
+[MIT License](./LICENSE)
 
 ## Contact 
 
