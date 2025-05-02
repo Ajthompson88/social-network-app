@@ -24,7 +24,7 @@ A RESTful API for a social networking platform, built with Node.js, Express, Mon
 - [Database Seeding](#database-seeding)  
 - [File Structure](#file-structure)  
 - [Testing](#testing)  
-- [Demo Video](#demo-video)
+- [Demo](#demo)
 - [Contributing](#contributing)  
 - [License](#license)  
 - [Contact](#contact)  
@@ -207,7 +207,24 @@ npm run seed
 
 **` npm test `**
 
-## Demo Video
+## Demo
+
+![Get Users](./Assets/getUsers.png)
+
+
+![Get Thoughts](./Assets/getThoughts.png)
+
+
+![New Users](./Assets/newUser.png)
+
+
+![New Thought](./Assets/newThought.png)
+
+
+![Delete Users](./Assets/deleteUser.png)
+
+
+![Delete Thoughts](./Assets/deleteThought.png)
 
 Social Network App Backend [Demo Video](https://app.screencastify.com/v3/watch/aybxCVVJlAF5omCl5n0N)
 
