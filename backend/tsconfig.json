@@ -1,15 +1,27 @@
 {
-    "compilerOptions": {
-      "target": "ES2021",
-      "module": "CommonJS",
-      "outDir": "./dist",
-      "rootDir": "./",
-      "strict": true,
-      "esModuleInterop": true,
-      "skipLibCheck": true,
-      "types": ["jest"],
-      "forceConsistentCasingInFileNames": true
-    },
-    "include": ["server.ts", "config/**/*", "controllers/**/*", "models/**/*", "routes/**/*", "utils/**/*"]
-  }
-  
+  "compilerOptions": {
+    "target": "es6", // Target ECMAScript 6
+    "module": "commonjs", // Use CommonJS module system
+    "outDir": "./dist", // Output directory for compiled files
+    "rootDir": "./", // Root directory of the project
+    "strict": true, // Enable strict type-checking options
+    "esModuleInterop": true, // Allow default imports from CommonJS modules
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "types": ["jest"], // Include Jest types for testing
+    "forceConsistentCasingInFileNames": true, // Enforce consistent casing in file names
+    "noImplicitAny": true // Disallow `any` type unless explicitly specified
+  },
+  "include": [
+    "server.ts", // Include the server entry point
+    "config/**/*", // Include all files in the config folder
+    "controllers/**/*", // Include all files in the controllers folder
+    "models/**/*", // Include all files in the models folder
+    "routes/**/*", // Include all files in the routes folder
+    "utils/**/*" // Include all files in the utils folder
+  ],
+  "exclude": [
+    "node_modules", // Exclude dependencies
+    "tests", // Exclude the tests folder
+    "**/*.test.ts" // Exclude all test files with .test.ts extension
+  ]
+}

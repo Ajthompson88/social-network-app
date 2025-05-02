@@ -1,106 +1,177 @@
-import { Request, Response } from 'express'; // Importing tools to handle HTTP requests and responses
-import Thought from '../models/Thought'; // Importing the Thought model to interact with the database
-import User from '../models/User'; // Importing the User model to interact with the database
+import { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import Thought from '../models/Thought';
+import User from '../models/User';
 
-// GET all thoughts
+// Utility function for error handling
+const handleError = (res: Response, error: any, message: string): void => {
+  console.error(message, error);
+  res.status(500).json({ success: false, message });
+};
+
+// Utility function to validate ObjectId
+const isValidObjectId = (id: string): boolean => mongoose.Types.ObjectId.isValid(id);
+
+// GET all thoughts with pagination
 export const getThoughts = async (req: Request, res: Response): Promise<void> => {
   try {
-    // Fetch all thoughts from the database
-    const thoughts = await Thought.find();
-    // Send the list of thoughts back to the client with a success message
+    const { page = '1', limit = '10' } = req.query as { page?: string; limit?: string };
+    const thoughts = await Thought.find()
+      .skip((Number(page) - 1) * Number(limit))
+      .limit(Number(limit));
+
+    if (!thoughts || thoughts.length === 0) {
+      res.status(404).json({ success: false, message: 'No thoughts found' });
+      return;
+    }
+
     res.status(200).json({ success: true, data: thoughts });
-  } catch (error: unknown) {
-    // If something goes wrong, send an error message back to the client
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    res.status(500).json({ success: false, message: 'Failed to get thoughts', error: errorMessage });
+  } catch (error) {
+    handleError(res, error, 'Failed to fetch thoughts');
   }
 };
 
 // GET a single thought by ID
 export const getSingleThought = async (req: Request, res: Response): Promise<void> => {
   try {
-    // Find a specific thought in the database using the ID provided in the request
+    if (!isValidObjectId(req.params.thoughtId)) {
+      res.status(400).json({ success: false, message: 'Invalid thought ID' });
+      return;
+    }
+
     const thought = await Thought.findById(req.params.thoughtId);
+
     if (!thought) {
-      // If the thought doesn't exist, send a "not found" message
       res.status(404).json({ success: false, message: 'Thought not found' });
       return;
     }
-    // If the thought is found, send it back to the client
+
     res.status(200).json({ success: true, data: thought });
-  } catch (error: unknown) {
-    // If something goes wrong, send an error message back to the client
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    res.status(500).json({ success: false, message: 'Failed to get thought', error: errorMessage });
+  } catch (error) {
+    handleError(res, error, 'Failed to fetch thought');
   }
 };
 
 // POST create a new thought
 export const createThought = async (req: Request, res: Response): Promise<void> => {
   try {
-    // Extract the thought text, username, and user ID from the request body
     const { thoughtText, username, userId } = req.body;
-    // Create a new thought in the database
+
+    if (!thoughtText || !username || !userId || !isValidObjectId(userId)) {
+      res.status(400).json({ success: false, message: 'Invalid input' });
+      return;
+    }
+
     const thought = await Thought.create({ thoughtText, username });
-    
-    // Add the new thought's ID to the user's list of thoughts
     const user = await User.findByIdAndUpdate(
-      userId, // Find the user by their ID
-      { $push: { thoughts: thought._id } }, // Add the thought ID to the user's "thoughts" array
-      { new: true } // Return the updated user document
+      userId,
+      { $push: { thoughts: thought._id } },
+      { new: true }
     );
+
     if (!user) {
-      // If the user doesn't exist, send a "not found" message
       res.status(404).json({ success: false, message: 'User not found, thought created but not associated' });
       return;
     }
-    // If everything is successful, send the new thought back to the client
+
     res.status(201).json({ success: true, data: thought });
-  } catch (error: unknown) {
-    // If something goes wrong, send an error message back to the client
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    res.status(500).json({ success: false, message: 'Failed to create thought', error: errorMessage });
+  } catch (error) {
+    handleError(res, error, 'Failed to create thought');
   }
 };
 
 // PUT update a thought by ID
 export const updateThought = async (req: Request, res: Response): Promise<void> => {
   try {
-    // Find a thought by its ID and update it with the data provided in the request body
+    if (!isValidObjectId(req.params.thoughtId)) {
+      res.status(400).json({ success: false, message: 'Invalid thought ID' });
+      return;
+    }
+
     const thought = await Thought.findByIdAndUpdate(
-      req.params.thoughtId, // The ID of the thought to update
-      req.body, // The new data for the thought
-      { new: true, runValidators: true } // Return the updated thought and validate the data
+      req.params.thoughtId,
+      req.body,
+      { new: true, runValidators: true }
     );
+
     if (!thought) {
-      // If the thought doesn't exist, send a "not found" message
       res.status(404).json({ success: false, message: 'Thought not found' });
       return;
     }
-    // If the update is successful, send the updated thought back to the client
+
     res.status(200).json({ success: true, data: thought });
-  } catch (error: unknown) {
-    // If something goes wrong, send an error message back to the client
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    res.status(500).json({ success: false, message: 'Failed to update thought', error: errorMessage });
+  } catch (error) {
+    handleError(res, error, 'Failed to update thought');
   }
 };
 
 // DELETE remove a thought by ID
 export const deleteThought = async (req: Request, res: Response): Promise<void> => {
   try {
-    // Find a thought by its ID and delete it from the database
+    if (!isValidObjectId(req.params.thoughtId)) {
+      res.status(400).json({ success: false, message: 'Invalid thought ID' });
+      return;
+    }
+
     const thought = await Thought.findByIdAndDelete(req.params.thoughtId);
+
     if (!thought) {
-      // If the thought doesn't exist, send a "not found" message
       res.status(404).json({ success: false, message: 'Thought not found' });
       return;
     }
-    // If the deletion is successful, send the deleted thought back to the client
+
     res.status(200).json({ success: true, data: thought });
-  } catch (error: unknown) {
-    // If something goes wrong, send an error message back to the client
-    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-    res.status(500).json({ success: false, message: 'Failed to delete thought', error: errorMessage });
+  } catch (error) {
+    handleError(res, error, 'Failed to delete thought');
   }
 };
+
+// POST add a reaction to a thought
+export const addReaction = async (req: Request, res: Response): Promise<void> => {
+  try {
+    if (!isValidObjectId(req.params.thoughtId)) {
+      res.status(400).json({ success: false, message: 'Invalid thought ID' });
+      return;
+    }
+
+    const thought = await Thought.findByIdAndUpdate(
+      req.params.thoughtId,
+      { $addToSet: { reactions: req.body } },
+      { new: true, runValidators: true }
+    );
+
+    if (!thought) {
+      res.status(404).json({ success: false, message: 'Thought not found' });
+      return;
+    }
+
+    res.status(200).json({ success: true, data: thought });
+  } catch (error) {
+    handleError(res, error, 'Failed to add reaction');
+  }
+};
+
+// DELETE remove a reaction from a thought
+export const removeReaction = async (req: Request, res: Response): Promise<void> => {
+  try {
+    if (!isValidObjectId(req.params.thoughtId)) {
+      res.status(400).json({ success: false, message: 'Invalid thought ID' });
+      return;
+    }
+
+    const thought = await Thought.findByIdAndUpdate(
+      req.params.thoughtId,
+      { $pull: { reactions: { reactionId: req.params.reactionId } } },
+      { new: true }
+    );
+
+    if (!thought) {
+      res.status(404).json({ success: false, message: 'Thought not found' });
+      return;
+    }
+
+    res.status(200).json({ success: true, data: thought });
+  } catch (error) {
+    handleError(res, error, 'Failed to remove reaction');
+  }
+}

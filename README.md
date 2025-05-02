@@ -3,10 +3,9 @@
 
 ## Table of Contents
 - [Description](#description)
-- [Installation](#installation)
 - [Usage](#usage)
 - [Questions](#questions)
-- [Contributions](#contributions)
+- [Contributions](#Contributions)
 - [Authors](#authors)
 - [License](#license)
 
@@ -32,21 +31,20 @@ The Social Network API is a NoSQL-based backend application designed to support 
 | dotenv          | Loads environment variables from a `.env` file |
 | cors            | Middleware for handling Cross-Origin Resource Sharing |
 
-- npm install express mongoose dotenv cors
 
 #### 💽 Install DevDependancies 
 
 | Package | 	Description            |
 |---------|----------------------------|
 | typescript	| Enables TypeScript support |
-|ts-node-dev	| Runs TypeScript code in development mode with auto-restart|
+| ts-node-dev	| Runs TypeScript code in development mode with auto-restart|
 | @types/express	| Type definitions for Express.js |
 | @types/mongoose	|Type definitions for Mongoose |
-|jest	|JavaScript testing framework|
-|supertest	|Library for testing API endpoints|
-|@types/jest	|Type definitions for Jest|
-|@types/supertest	|Type definitions for Supertest |
-|mongodb-memory-server	|In-memory MongoDB instance for testing |
+| jest	|JavaScript testing framework|
+| supertest	|Library for testing API endpoints|
+| @types/jest	|Type definitions for Jest|
+| @types/supertest	|Type definitions for Supertest |
+| mongodb-memory-server	|In-memory MongoDB instance for testing |
 
 npm install --save-dev typescript ts-node-dev @types/express @types/mongoose jest supertest @types/jest @types/supertest mongodb-memory-server
 
@@ -107,15 +105,15 @@ npm install --save-dev typescript ts-node-dev @types/express @types/mongoose jes
 
 | Script | Command | Description |
 |--------|---------|-------------|
-| Run Tests | npm test | Executes Jest tests |
-| Watch Tests | npm run test:watch | Runs Jest in watch mode for live testing |
-| Test Coverage | npm run test:coverage | Shows Jest test coverage report |
+| `Run Tests` | `npm test` | Executes Jest tests |
+| `Watch Tests` | `npm run test:watch` | Runs Jest in watch mode for live testing |
+| `Test Coverage` | `npm run test:coverage` | Shows Jest test coverage report |
 
 
 ## Questions
 For any questions, please contact me at:
 - GitHub: https://github.com/Ajthompson88/
-- Email: aj.thompson8888@gmail.com
+- Email: aj.thompson8888@gmail.com/
 
 ## 📩 Contributions
 

@@ -36,15 +36,7 @@ describe('User Controller', () => {
     // Test case: should return 404 when no users are found
     it('should return 404 when no users are found', async () => {
       // Mock the User.find method to simulate no users being found
-      jest.spyOn(User, 'find').mockImplementationOnce(() => {
-        return {
-          populate: () => {
-            return {
-              populate: () => Promise.resolve([] as IUser[]), // Simulate an empty array of users
-            };
-          },
-        } as any; // Cast the mock implementation to any to bypass type checks
-      });
+      jest.spyOn(User, 'find').mockResolvedValueOnce([]); // Simulate no users found
 
       // Call the getAllUsers function with the mock Request and Response objects
       await getAllUsers(req as Request, res as Response);
