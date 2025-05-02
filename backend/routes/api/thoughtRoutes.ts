@@ -4,7 +4,7 @@ import {
   getThoughtById,
   createThought,
   deleteThought
-} from '../controllers/thoughtController';
+} from '../../controllers/thoughtController.js';
 
 const router = Router();
 

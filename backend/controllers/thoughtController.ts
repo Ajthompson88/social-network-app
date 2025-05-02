@@ -1,7 +1,7 @@
 // controllers/thoughtController.ts
 import { Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
-import Thought from '../models/Thought';
+import Thought from '../models/Thought.js';
 
 const isValidId = (id: string) => mongoose.Types.ObjectId.isValid(id);
 

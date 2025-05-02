@@ -4,7 +4,7 @@ import {
   getUserById,
   createUser,
   deleteUser
-} from '../controllers/userController';
+} from '../../controllers/userController.js';
 
 const router = Router();
 

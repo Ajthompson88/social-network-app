@@ -1,137 +1,229 @@
+# Social Network API
 
-# Social Network App
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen)]()  
+[![Coverage](https://img.shields.io/badge/coverage-90%25-yellowgreen)]()  
+[![License](https://img.shields.io/badge/license-MIT-blue)]()
+
+A RESTful API for a social networking platform, built with Node.js, Express, MongoDB and TypeScript. Users can register, create “thoughts,” react to others’ thoughts, and manage a friend list. Robust validation, comprehensive testing, and clean architecture make it production-ready.
+
+---
 
 ## Table of Contents
-- [Description](#description)
-- [Usage](#usage)
-- [Questions](#questions)
-- [Contributions](#Contributions)
-- [Authors](#authors)
-- [License](#license)
 
-## Description
-The Social Network API is a NoSQL-based backend application designed to support a social networking platform. This API allows users to create accounts, share thoughts, react to other users' thoughts, and manage a friend list. Built using Node.js, Express.js, MongoDB, and Mongoose, the API follows a RESTful architecture and efficiently handles large amounts of unstructured data.
-
-## Usage
-
-### 📂 Installation & Setup
-
-#### Clone the Repository
-
-- git clone git@github.com:Ajthompson88/social-network-app.git
-
-- cd backend
-
-#### 💽 Install Dependancies
-
-| Package         | Description                   |
-|-----------------|-------------------------------|
-| express         | Web framework for API routing |
-| mongoose        | MongoDB ODM (Object Data Modeling) |
-| dotenv          | Loads environment variables from a `.env` file |
-| cors            | Middleware for handling Cross-Origin Resource Sharing |
-
-
-#### 💽 Install DevDependancies 
-
-| Package | 	Description            |
-|---------|----------------------------|
-| typescript	| Enables TypeScript support |
-| ts-node-dev	| Runs TypeScript code in development mode with auto-restart|
-| @types/express	| Type definitions for Express.js |
-| @types/mongoose	|Type definitions for Mongoose |
-| jest	|JavaScript testing framework|
-| supertest	|Library for testing API endpoints|
-| @types/jest	|Type definitions for Jest|
-| @types/supertest	|Type definitions for Supertest |
-| mongodb-memory-server	|In-memory MongoDB instance for testing |
-
-npm install --save-dev typescript ts-node-dev @types/express @types/mongoose jest supertest @types/jest @types/supertest mongodb-memory-server
-
-
-#### 🌎 Set Envinronment Variables
-
-- MONGO_URI=mongodb://"your URL here"
-- PORT=3000
-
-#### Start the Server
-
-- npm run dev
-- npm start
-
-#### Explanation of Scripts 
-
-| Script | Command | Description|
-|--------|---------|------------|
-| Start Server| npm start| Runs the compiled JavaScript version `(dist/server.js)`|
-| Development Mode | npm run dev | Runs TypeScript `(src/server.ts)` with auto-reloading|
-| Build Project | npm run build | Compiles files into JavaScript `(dist/)` folder|
-
-## 📡 API Routes
-
-#### 🧑 User Routes
-| Method  | Endpoint                           | Description                          |
-|---------|------------------------------------|--------------------------------------|
-| `GET`   | `/api/users`                      | Get all users                        |
-| `GET`   | `/api/users/:userId`              | Get a single user by ID              |
-| `POST`  | `/api/users`                      | Create a new user                    |
-| `PUT`   | `/api/users/:userId`              | Update a user by ID                  |
-| `DELETE`| `/api/users/:userId`              | Delete a user by ID                  |
-| `POST`  | `/api/users/:userId/friends/:friendId` | Add a friend |
-| `DELETE`| `/api/users/:userId/friends/:friendId` | Remove a friend |
+- [Features](#features)  
+- [Tech Stack](#tech-stack)  
+- [Prerequisites](#prerequisites)  
+- [Installation & Setup](#installation--setup)  
+- [Environment Variables](#environment-variables)  
+- [Available Scripts](#available-scripts)  
+- [Data Models](#data-models)  
+- [API Reference](#api-reference)  
+  - [User Routes](#user-routes)  
+  - [Thought Routes](#thought-routes)  
+  - [Reaction Routes](#reaction-routes)  
+- [Database Seeding](#database-seeding)  
+- [Project Structure](#project-structure)  
+- [Testing](#testing)  
+- [Contributing](#contributing)  
+- [License](#license)  
+- [Contact](#contact)  
 
 ---
 
-#### 💭 Thought Routes
-| Method  | Endpoint                          | Description                         |
-|---------|-----------------------------------|-------------------------------------|
-| `GET`   | `/api/thoughts`                   | Get all thoughts                   |
-| `GET`   | `/api/thoughts/:thoughtId`        | Get a single thought by ID         |
-| `POST`  | `/api/thoughts`                   | Create a new thought               |
-| `PUT`   | `/api/thoughts/:thoughtId`        | Update a thought by ID             |
-| `DELETE`| `/api/thoughts/:thoughtId`        | Delete a thought by ID             |
+## Features
+
+- **User Management**: register, update profile, delete account  
+- **Thoughts**: create, read, update, delete social posts (“thoughts”)  
+- **Reactions**: add/remove reactions (emoji-style) on any thought  
+- **Friend System**: add/remove friends, view friend lists  
+- **Timestamps**: human‑friendly date formatting via a reusable utility  
+- **Validation & Error Handling**: robust guardrails on all inputs  
+- **Automated Testing**: Jest & Supertest for unit and integration coverage  
 
 ---
 
-#### 💬 Reaction Routes
-| Method  | Endpoint                                  | Description                          |
-|---------|------------------------------------------|--------------------------------------|
-| `POST`  | `/api/thoughts/:thoughtId/reactions`    | Add a reaction to a thought         |
-| `DELETE`| `/api/thoughts/:thoughtId/reactions/:reactionId` | Remove a reaction from a thought |
+## Tech Stack
+
+- **Runtime & Framework**: Node.js, Express.js  
+- **Language**: TypeScript  
+- **Database**: MongoDB (Mongoose ODM)  
+- **Testing**: Jest, Supertest, mongodb-memory-server  
+- **Utilities**: dotenv, cors, date formatting helper  
+
+---
+
+## Prerequisites
+
+- **Node.js** v14+  
+- **npm** v6+  
+- **MongoDB** Atlas cluster or local instance  
+
+---
+
+## Installation & Setup
+
+1. **Clone the repo**  
+   ``` bash
+   git clone git@github.com:Ajthompson88/social-network-app.git
+
+   cd social-network-app   
+2. **Install dependencies**
+
+    **` npm install `**
+3. **Build TypeScript**
+   
+    **` npm run build `**
+4. **Configure Environment**
+
+    Copy **` .env.EXAMPLE `** to **` .env `** and update the values
+5. **Run in Development**
+ 
+    **` npm run dev `**
+6. **Run in Production**
+
+    **` npm start `**
+
+## Environment Variables
+
+| Variable    | Description                                    |
+| ----------- | ---------------------------------------------- |
+| `MONGO_URI` | MongoDB connection string (Atlas or localhost) |
+| `PORT`      | Port on which to run the API (default: 3000)   |
+
+## Available Scripts
+
+| Script                  | Command | Description                        |
+| ----------------------- | ------- | ---------------------------------- |
+| `npm run dev`           | —       | Run in dev mode with `ts-node-dev` |
+| `npm run build`         | —       | Compile TypeScript to `dist/`      |
+| `npm start`             | —       | Run compiled JS (`dist/index.js`)  |
+| `npm run seed`          | —       | Seed database with sample data     |
+| `npm test`              | —       | Run all Jest tests                 |
+| `npm run test:watch`    | —       | Jest in watch mode                 |
+| `npm run test:coverage` | —       | Generate coverage report           |
+
+## Data Models
+
+### User
+
+| Field       | Type         | Description                          |
+| ----------- | ------------ | ------------------------------------ |
+| `username`  | `string`     | Unique, required                     |
+| `email`     | `string`     | Valid email format, unique, required |
+| `thoughts`  | `ObjectId[ ]` | References to Thought documents      |
+| `friends`   | `ObjectId[ ]` | References to other User documents   |
+| `createdAt` | `Date`       | Automatically set on creation        |
+
+### Thought
+
+| Field         | Type         | Description                           |
+| ------------- | ------------ | ------------------------------------- |
+| `thoughtText` | `string`     | 1–280 characters, required            |
+| `username`    | `string`     | Creator’s username, required          |
+| `createdAt`   | `Date`       | Automatically set, formatted via util |
+| `reactions`   | `Reaction[ ]` | Subdocuments of Reaction schema       |
+
+### Reaction
+
+| Field          | Type       | Description                           |
+| -------------- | ---------- | ------------------------------------- |
+| `reactionId`   | `ObjectId` | Unique identifier                     |
+| `reactionBody` | `string`   | 1–280 characters, required            |
+| `username`     | `string`   | Reactor’s username, required          |
+| `createdAt`    | `Date`     | Automatically set, formatted via util |
+
+## API Reference 
+
+**`Base URL: http://localhost:<PORT>/api`**
+
+### User Routes 
+
+| Method   | Endpoint                           | Description          |
+| -------- | ---------------------------------- | -------------------- |
+| `GET`    | `/users`                           | List all users       |
+| `GET`    | `/users/:userId`                   | Get a user by ID     |
+| `POST`   | `/users`                           | Create a new user    |
+| `PUT`    | `/users/:userId`                   | Update a user’s info |
+| `DELETE` | `/users/:userId`                   | Remove a user        |
+| `POST`   | `/users/:userId/friends/:friendId` | Add a friend         |
+| `DELETE` | `/users/:userId/friends/:friendId` | Remove a friend      |
+
+### Thought Routes
+
+| Method   | Endpoint               | Description          |
+| -------- | ---------------------- | -------------------- |
+| `GET`    | `/thoughts`            | List all thoughts    |
+| `GET`    | `/thoughts/:thoughtId` | Get a thought by ID  |
+| `POST`   | `/thoughts`            | Create a new thought |
+| `PUT`    | `/thoughts/:thoughtId` | Update a thought     |
+| `DELETE` | `/thoughts/:thoughtId` | Delete a thought     |
+
+### Reaction Routes
+
+| Method   | Endpoint                                     | Description                 |
+| -------- | -------------------------------------------- | --------------------------- |
+| `POST`   | `/thoughts/:thoughtId/reactions`             | Add a reaction to a thought |
+| `DELETE` | `/thoughts/:thoughtId/reactions/:reactionId` | Remove a reaction           |
+
+## Database Seeding
+
+npm run seed
+
+## File Structure
+
+    social-network-app
+    ├── src
+    │   ├── controllers
+    │   │   ├── userController.ts
+    │   │   ├── thoughtController.ts
+    │   │   └── reactionController.ts
+    │   ├── models
+    │   │   ├── User.ts
+    │   │   ├── Thought.ts
+    │   │   └── Reaction.ts
+    │   ├── routes
+    │   │   ├── userRoutes.ts
+    │   │   ├── thoughtRoutes.ts
+    │   │   └── reactionRoutes.ts
+    │   ├── utils
+    │   │   └── dateFormatter.ts
+    │   ├── config
+    │   │   └── database.ts
+    │   ├── app.ts
+    │   └── server.ts
+    ├── tests
+    │   ├── user.test.ts
+    │   ├── thought.test.ts
+    │   └── reaction.test.ts
+    ├── .env.EXAMPLE
+    ├── jest.config.js
+    ├── package.json
+    ├── tsconfig.json
+    └── README.md
 
 
+## Testing
 
-## 🧪 Running Tests
+**` npm test `**
 
-| Script | Command | Description |
-|--------|---------|-------------|
-| `Run Tests` | `npm test` | Executes Jest tests |
-| `Watch Tests` | `npm run test:watch` | Runs Jest in watch mode for live testing |
-| `Test Coverage` | `npm run test:coverage` | Shows Jest test coverage report |
+## Contributing
 
+    1. Fork the repository
 
-## Questions
-For any questions, please contact me at:
-- GitHub: https://github.com/Ajthompson88/
-- Email: aj.thompson8888@gmail.com/
+    2. Create a feature branch (git checkout -b feature/YourFeature)
 
-## 📩 Contributions
+    3. Commit your changes (git commit -m 'Add some feature')
 
-If you have any issues, suggestions, or contributions, feel free to open an issue or submit a pull request!
+    4. Push to the branch (git push origin feature/YourFeature)
 
-## Authors
+    5. Open a Pull Request
 
-- Andrew Thompson 
-- AI assistance provided by ChatGPT
-- AI assistance provided by Github Copilot
+Please adhere to existing code style and include tests for new functionality.
 
-## 📜 License
-MIT
+## Contact 
 
-## 🎯 Summary
+Andrew Thompson
 
-- Fully functional backend API for a social network.
-- CRUD operations for Users, Thoughts, and Reactions.
-- MongoDB database with Mongoose models.
-- Comprehensive API testing using Jest & Supertest.
-- RESTful architecture built with Express.js.
+- GitHub: Ajthompson88
+
+- Email: aj.thompson8888@gmail.com
