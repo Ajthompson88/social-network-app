@@ -1,7 +1,5 @@
 # Social Network API
 
-[![License](https://img.shields.io/badge/license-MIT-blue)]()
-
 A RESTful API for a social networking platform, built with Node.js, Express, MongoDB and TypeScript. Users can register, create “thoughts,” react to others’ thoughts, and manage a friend list. Robust validation, comprehensive testing, and clean architecture make it production-ready.
 
 ---
@@ -207,7 +205,7 @@ npm run seed
 
 ## Demo
 
-Social Network App Backend [Demo Video](https://app.screencastify.com/v3/watch/aybxCVVJlAF5omCl5n0N)
+Social Network App Backend [Demo Video](https://drive.google.com/file/d/1WeOa43LLgE54m47OKncVkh5iFJxsNEA-/view)
 
 ![Get Users](./Assets/getUsers.png)
 
@@ -242,6 +240,8 @@ Social Network App Backend [Demo Video](https://app.screencastify.com/v3/watch/a
 Please adhere to existing code style and include tests for new functionality.
 
 ## License
+
+[![License](https://img.shields.io/badge/license-MIT-blue)]()
 
 [MIT License](./LICENSE)
 
